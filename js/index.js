@@ -9,7 +9,7 @@ $(document).ready(() => {
 
     })
 })
-
+//--------------------------------------- N  A  V ----------------------------------------------
 function openNav() {
     $(".side-nav-menu").animate({
         left: 0
@@ -52,6 +52,10 @@ $(".side-nav-menu i.open-close-icon").click(() => {
 })
 
 
+//--------------------------------------- N  A  V ----------------------------------------------
+
+
+//--------------------------------------- D I S P L A Y      M E A L  ----------------------------------------------
 
 
 function displayMeals(arr) {
@@ -73,18 +77,20 @@ function displayMeals(arr) {
     rowData.innerHTML = cartoona
 }
 
+//--------------------------------------- DISPLAY     MEAL ----------------------------------------------
+//--------------------------------------- C A T E G O R I E S ----------------------------------------------
 
 
 async function getCategories() {
     rowData.innerHTML = ""
-    $(".inner-loading-screen").fadeIn(300)
+    $(".inner-loading-screen").fadeIn(400)
     searchContainer.innerHTML = "";
 
     let response = await fetch(`https://www.themealdb.com/api/json/v1/1/categories.php`)
     response = await response.json()
 
     displayCategories(response.categories)
-    $(".inner-loading-screen").fadeOut(300)
+    $(".inner-loading-screen").fadeOut(400)
 
 }
 
@@ -107,11 +113,13 @@ function displayCategories(arr) {
 
     rowData.innerHTML = cartoona
 }
+//--------------------------------------- C A T E G O R I E S ----------------------------------------------
+//---------------------------------------        A R E A      ----------------------------------------------
 
 
 async function getArea() {
     rowData.innerHTML = ""
-    $(".inner-loading-screen").fadeIn(300)
+    $(".inner-loading-screen").fadeIn(400)
 
     searchContainer.innerHTML = "";
 
@@ -120,7 +128,7 @@ async function getArea() {
     console.log(respone.meals);
 
     displayArea(respone.meals)
-    $(".inner-loading-screen").fadeOut(300)
+    $(".inner-loading-screen").fadeOut(400)
 
 }
 
@@ -141,11 +149,15 @@ function displayArea(arr) {
 
     rowData.innerHTML = cartoona
 }
+//---------------------------------------        A R E A      ----------------------------------------------
+
+
+//---------------------------------------     I N G R E D I E N T S     ----------------------------------------------
 
 
 async function getIngredients() {
     rowData.innerHTML = ""
-    $(".inner-loading-screen").fadeIn(300)
+    $(".inner-loading-screen").fadeIn(400)
 
     searchContainer.innerHTML = "";
 
@@ -154,7 +166,7 @@ async function getIngredients() {
     console.log(respone.meals);
 
     displayIngredients(respone.meals.slice(0, 20))
-    $(".inner-loading-screen").fadeOut(300)
+    $(".inner-loading-screen").fadeOut(400)
 
 }
 
@@ -178,16 +190,21 @@ function displayIngredients(arr) {
 }
 
 
+//---------------------------------------     I N G R E D I E N T S     ----------------------------------------------
+
+//---------------------------------------         A L L   M E A L  G E T S       ----------------------------------------------
+
+
 async function getCategoryMeals(category) {
     rowData.innerHTML = ""
-    $(".inner-loading-screen").fadeIn(300)
+    $(".inner-loading-screen").fadeIn(400)
 
     let response = await fetch(`https://www.themealdb.com/api/json/v1/1/filter.php?c=${category}`)
     response = await response.json()
 
 
     displayMeals(response.meals.slice(0, 20))
-    $(".inner-loading-screen").fadeOut(300)
+    $(".inner-loading-screen").fadeOut(400)
 
 }
 
@@ -195,45 +212,49 @@ async function getCategoryMeals(category) {
 
 async function getAreaMeals(area) {
     rowData.innerHTML = ""
-    $(".inner-loading-screen").fadeIn(300)
+    $(".inner-loading-screen").fadeIn(400)
 
     let response = await fetch(`https://www.themealdb.com/api/json/v1/1/filter.php?a=${area}`)
     response = await response.json()
 
 
     displayMeals(response.meals.slice(0, 20))
-    $(".inner-loading-screen").fadeOut(300)
+    $(".inner-loading-screen").fadeOut(400)
 
 }
 
 
 async function getIngredientsMeals(ingredients) {
     rowData.innerHTML = ""
-    $(".inner-loading-screen").fadeIn(300)
+    $(".inner-loading-screen").fadeIn(400)
 
     let response = await fetch(`https://www.themealdb.com/api/json/v1/1/filter.php?i=${ingredients}`)
     response = await response.json()
 
 
     displayMeals(response.meals.slice(0, 20))
-    $(".inner-loading-screen").fadeOut(300)
+    $(".inner-loading-screen").fadeOut(400)
 
 }
 
 async function getMealDetails(mealID) {
     closeNav()
     rowData.innerHTML = ""
-    $(".inner-loading-screen").fadeIn(300)
+    $(".inner-loading-screen").fadeIn(400)
 
     searchContainer.innerHTML = "";
     let respone = await fetch(`https://www.themealdb.com/api/json/v1/1/lookup.php?i=${mealID}`);
     respone = await respone.json();
 
     displayMealDetails(respone.meals[0])
-    $(".inner-loading-screen").fadeOut(300)
+    $(".inner-loading-screen").fadeOut(400)
 
 }
 
+//---------------------------------------         A L L    M E A L  G E T S       ----------------------------------------------
+
+
+//---------------------------------------          D E A T A I L S     ----------------------------------------------
 
 function displayMealDetails(meal) {
     
@@ -249,7 +270,7 @@ function displayMealDetails(meal) {
     }
 
     let tags = meal.strTags?.split(",")
-    // let tags = meal.strTags.split(",")
+
     if (!tags) tags = []
 
     let tagsStr = ''
@@ -288,6 +309,8 @@ function displayMealDetails(meal) {
     rowData.innerHTML = cartoona
 }
 
+//---------------------------------------          D E A T A I L S     ----------------------------------------------
+//---------------------------------------            S E A R C H       ----------------------------------------------
 
 function showInputSearch() {
     searchContainer.innerHTML = `
@@ -306,30 +329,32 @@ function showInputSearch() {
 async function searchName(term) {
     closeNav()
     rowData.innerHTML = ""
-    $(".inner-loading-screen").fadeIn(300)
+    $(".inner-loading-screen").fadeIn(400)
 
     let response = await fetch(`https://www.themealdb.com/api/json/v1/1/search.php?s=${term}`)
     response = await response.json()
 
     response.meals ? displayMeals(response.meals) : displayMeals([])
-    $(".inner-loading-screen").fadeOut(300)
+    $(".inner-loading-screen").fadeOut(400)
 
 }
 
 async function searchLetter(term) {
     closeNav()
     rowData.innerHTML = ""
-    $(".inner-loading-screen").fadeIn(300)
+    $(".inner-loading-screen").fadeIn(400)
 
     term == "" ? term = "a" : "";
     let response = await fetch(`https://www.themealdb.com/api/json/v1/1/search.php?f=${term}`)
     response = await response.json()
 
     response.meals ? displayMeals(response.meals) : displayMeals([])
-    $(".inner-loading-screen").fadeOut(300)
+    $(".inner-loading-screen").fadeOut(400)
 
 }
+//---------------------------------------            S E A R C H       ----------------------------------------------
 
+//---------------------------------------     S H O W  C O N T A C T S       ----------------------------------------------
 
 function showContacts() {
     rowData.innerHTML = `<div class="contact min-vh-100 d-flex justify-content-center align-items-center">
@@ -402,6 +427,9 @@ function showContacts() {
         repasswordInputTouched = true
     })
 }
+
+//---------------------------------------     S H O W  C O N T A C T S       ----------------------------------------------
+//---------------------------------------       V A L I D A T 0 I O N        ----------------------------------------------
 
 let nameInputTouched = false;
 let emailInputTouched = false;
@@ -499,3 +527,5 @@ function passwordValidation() {
 function repasswordValidation() {
     return document.getElementById("repasswordInput").value == document.getElementById("passwordInput").value
 }
+
+//---------------------------------------       V A L I D A T 0 I O N        ----------------------------------------------
